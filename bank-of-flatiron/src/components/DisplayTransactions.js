@@ -1,31 +1,48 @@
 import React from "react";
 
-function DisplayTransactions({ transactionsData }) {
+function DisplayTransactions({ transactionsData}) {
  
+  const divStyle = {
+  border: "1px solid #dddddd",
+  textAlign: "left",
+  padding: "8px"
+  }
 
   return (
-    <div>
+    <div style={{
+      marginTop: "20px",
+      boxShadow: "0px 0px 10px 0px rgba(0,0,0,1)"
+    }}>
      
-        <table style={{width:"100%",border:"1px solid black",borderCollapse:"collapse"}}>
+     {transactionsData.length > 0 ? (
+        <table style={{  
+          fontFamily:"arial", 
+          font:"sansSerif",
+          width:"100%",
+          border:"1px solid black",
+          borderCollapse:"collapse"}}>
           <thead>
             <tr>
-              <th style={{border:"1px solid black"}}>Date</th>
-              <th style={{border:"1px solid black"}}>Description</th>
-              <th style={{border:"1px solid black"}}>Category</th>
-              <th style={{border:"1px solid black"}}>Amount</th>
+              <th style={divStyle}>Date</th>
+              <th style={divStyle}>Description</th>
+              <th style={divStyle}>Category</th>
+              <th style={divStyle}>Amount</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody >
             {transactionsData.map((transaction, index) => (
-              <tr key={index}>
-                <td style={{border:"1px solid black",padding: "0"}}>{transaction.Date}</td>
-                <td style={{border:"1px solid black",padding: "0"}}>{transaction.Description}</td>
-                <td style={{border:"1px solid black",padding: "0"}}>{transaction.Category}</td>
-                <td style={{border:"1px solid black",padding: "0"}}>{transaction.Amount}</td>
+              <tr style={index % 2 === 0 ? { backgroundColor: "#dddddd" } : null} key={index} >
+                <td style={divStyle}>{transaction.Date}</td>
+                <td style={divStyle}>{transaction.Description}</td>
+                <td style={divStyle}>{transaction.Category}</td>
+                <td style={divStyle}>{transaction.Amount}</td>
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> 
+     ) : 
+       (<p> No transactions found</p>)
+}
       
     </div>
   );

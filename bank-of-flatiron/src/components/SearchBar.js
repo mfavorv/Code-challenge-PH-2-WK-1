@@ -1,33 +1,17 @@
 import React, { useState } from 'react';
 
-const SearchTransaction = ({ transactions, handleSearchResults }) => {
+const SearchTransaction = ({ transactionsData, handleSearch,setSearchResults}) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+ 
   
   const handleChange = (e) => {
-    const term = e.target.value.trim().toLowerCase();
+    const term = e.target.value
     setSearchTerm(term);
-    if (term === '') {
-      setSearchResults([]);
-      handleSearchResults([]);
-      
-    } else {
-      handleSearch(term);
-    }
+    handleSearch(term);
   };
 
-  const handleSearch = (term) => {
-    const results = transactions.filter(
-      (transaction) => transaction.Description.toLowerCase().includes(term)
-    );
-    
-    console.log(searchResults)
-    setSearchResults(results);
-    handleSearchResults(results);
-   
-  };
-
-  return (
+        
+    return (
     <div>
       <input 
        type="text" 
